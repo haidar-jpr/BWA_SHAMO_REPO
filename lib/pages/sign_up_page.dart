@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shamo/theme.dart';
 
-class SignInPage extends StatelessWidget {
-  const SignInPage({Key? key}) : super(key: key);
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,35 +15,49 @@ class SignInPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Header(
-              login: 'Login',
-              signIn: 'Sign In to Continue',
+              login: 'Sign Up',
+              signIn: 'Register and Happy Shoping',
             ),
-            const LoginAcccount(
+            const SignUpAcccount(
+              name: 'Full Name',
+              icon: 'assets/icon_name.png',
+              hint: 'Your Full Name',
+              obtxt: false,
+              margin: 50,
+            ),
+            const SignUpAcccount(
+              name: 'Username',
+              icon: 'assets/icon_username.png',
+              hint: 'Your Username',
+              obtxt: false,
+              margin: 20,
+            ),
+            const SignUpAcccount(
               name: 'Email Address',
               icon: 'assets/icon_email.png',
               hint: 'Your Email Address',
               obtxt: false,
-              margin: 70,
+              margin: 20,
             ),
-            const LoginAcccount(
+            const SignUpAcccount(
               name: 'Password',
               icon: 'assets/icon_password.png',
               hint: 'Your Password',
               obtxt: true,
               margin: 20,
             ),
-            SignInButton(
-              txt: 'Sign In',
+            SignUpButton(
+              txt: 'Sign Up',
               to: () {
                 Navigator.pushReplacementNamed(context, '/home');
               },
             ),
             const Spacer(),
-            ToSignUp(
-              txt1: 'Don\'t have an account?',
-              txt2: 'Sign Up',
+            ToSignIn(
+              txt1: 'Already have an account?',
+              txt2: 'Sign In',
               to: () {
-                Navigator.pushNamed(context, '/sign-up');
+                Navigator.pop(context);
               },
             ),
           ],
@@ -53,12 +67,12 @@ class SignInPage extends StatelessWidget {
   }
 }
 
-class ToSignUp extends StatelessWidget {
+class ToSignIn extends StatelessWidget {
   final String txt1;
   final String txt2;
   final VoidCallback to;
 
-  const ToSignUp({
+  const ToSignIn({
     Key? key,
     required this.txt1,
     required this.txt2,
@@ -130,14 +144,14 @@ class Header extends StatelessWidget {
   }
 }
 
-class LoginAcccount extends StatelessWidget {
+class SignUpAcccount extends StatelessWidget {
   final String name;
   final String icon;
   final String hint;
   final double margin;
   final bool obtxt;
 
-  const LoginAcccount(
+  const SignUpAcccount(
       {Key? key,
       required this.name,
       required this.icon,
@@ -199,11 +213,11 @@ class LoginAcccount extends StatelessWidget {
   }
 }
 
-class SignInButton extends StatelessWidget {
+class SignUpButton extends StatelessWidget {
   final String txt;
   final VoidCallback to;
 
-  const SignInButton({Key? key, required this.txt, required this.to})
+  const SignUpButton({Key? key, required this.txt, required this.to})
       : super(key: key);
 
   @override
