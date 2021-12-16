@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shamo/pages/home/chat_page.dart';
+import 'package:shamo/pages/home/home_page.dart';
+import 'package:shamo/pages/home/profile_page.dart';
+import 'package:shamo/pages/home/wishtlist_page.dart';
 import 'package:shamo/theme.dart';
 
 class MainPage extends StatefulWidget {
@@ -11,6 +15,25 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int currentIndex = 0;
 
+  Widget body() {
+    switch (currentIndex) {
+      case 0:
+        return HomePage();
+
+      case 1:
+        return ChatPage();
+
+      case 2:
+        return WishlistPage();
+
+      case 3:
+        return ProfilePage();
+
+      default:
+        return HomePage();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +42,7 @@ class _MainPageState extends State<MainPage> {
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterDocked,
       bottomNavigationBar: _bottomNavBar(),
-      body: const Text('Main'),
+      body: body(),
     );
   }
 
@@ -36,7 +59,6 @@ class _MainPageState extends State<MainPage> {
           currentIndex: currentIndex,
           onTap: (value) {
             setState(() {
-              print(value);
               currentIndex = value;
             });
           },
@@ -127,10 +149,10 @@ class IconNavBar extends StatelessWidget {
         right: paddingRight,
         left: paddingLeft,
       ),
-      color: color,
       child: Image.asset(
         url,
         width: width,
+        color: color,
       ),
     );
   }
