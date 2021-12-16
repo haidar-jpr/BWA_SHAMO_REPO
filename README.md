@@ -1,16 +1,14 @@
-# shamo
+# SHAMO
 
 A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Ini adalah mobile flutter project fullstack dari BWA (Build With Angga)
 
-A few resources to get you started if this is your first Flutter project:
+ini merupakan salah satu kelas premium
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+kenapa saya membeli kelas premium?
+- karena saya ingin belajar dari profesional bagaimana mereka mengatur struktur dari code flutter
+- secara versi flutter sdk yang digunakan juga tidak sama jadi mungkin akan ada sedikit tantangan 🕵️
+- saya bisa melakukan penyesuaiaan code sesuai dengan kreasi saya dan ilmu yang saya miliki, jadi dalam dokumentasi ini mungkin akan sedikit berbeda dengan code yang diketikkan oleh mentor
