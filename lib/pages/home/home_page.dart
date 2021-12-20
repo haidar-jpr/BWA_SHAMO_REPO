@@ -9,18 +9,13 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgColor1,
       body: ListView(
-        children: [
-          const HeaderHomePage(),
-          SizedBox(height: defaultMargin),
-          const CategoriesHome(),
-          SizedBox(height: defaultMargin),
-          const PopularProductsHome(),
-          const SizedBox(height: 14),
-          const CardProductsHome(),
-          SizedBox(height: defaultMargin),
-          const NewArrivalHome(),
-          const SizedBox(height: 14),
-          const NewArrivalSection(),
+        children: const [
+          HeaderHomePage(),
+          CategoriesHome(),
+          PopularProductsHome(),
+          CardProductsHome(),
+          NewArrivalHome(),
+          NewArrivalSection(),
         ],
       ),
     );
@@ -148,6 +143,7 @@ class NewArrivalHome extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(
         left: defaultMargin,
+        bottom: 14,
       ),
       child: Text(
         'New Arrivals',
@@ -167,29 +163,34 @@ class CardProductsHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: const [
-          ProductItems(
-            img: 'assets/img_shoes.png',
-            category: 'Hiking',
-            name: 'COURT VISION 2.0',
-            price: '\$58,67',
-          ),
-          ProductItems(
-            img: 'assets/img_shoes.png',
-            category: 'Hiking',
-            name: 'COURT VISION 2.0',
-            price: '\$58,67',
-          ),
-          ProductItems(
-            img: 'assets/img_shoes.png',
-            category: 'Hiking',
-            name: 'COURT VISION 2.0',
-            price: '\$58,67',
-          ),
-        ],
+    return Container(
+      margin: EdgeInsets.only(
+        bottom: defaultMargin,
+      ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: const [
+            ProductItems(
+              img: 'assets/img_shoes.png',
+              category: 'Hiking',
+              name: 'COURT VISION 2.0',
+              price: '\$58,67',
+            ),
+            ProductItems(
+              img: 'assets/img_shoes.png',
+              category: 'Hiking',
+              name: 'COURT VISION 2.0',
+              price: '\$58,67',
+            ),
+            ProductItems(
+              img: 'assets/img_shoes.png',
+              category: 'Hiking',
+              name: 'COURT VISION 2.0',
+              price: '\$58,67',
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -284,6 +285,7 @@ class PopularProductsHome extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(
         left: defaultMargin,
+        bottom: 14,
       ),
       child: Text(
         'Popular Products',
@@ -306,6 +308,7 @@ class CategoriesHome extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(
         left: defaultMargin - 1,
+        bottom: defaultMargin,
       ),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
@@ -409,10 +412,8 @@ class HeaderHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
-        top: defaultMargin,
-        left: defaultMargin,
-        right: defaultMargin,
+      margin: EdgeInsets.all(
+        defaultMargin,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
