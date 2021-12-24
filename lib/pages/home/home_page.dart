@@ -83,51 +83,56 @@ class NewArrivalItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(bottom: defaultMargin),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.asset(
-              img,
-              width: 120,
-              height: 120,
-              fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, '/products');
+      },
+      child: Container(
+        margin: EdgeInsets.only(bottom: defaultMargin),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                img,
+                width: 120,
+                height: 120,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  category,
-                  style: secondaryTextStyle.copyWith(
-                    fontSize: 12,
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    category,
+                    style: secondaryTextStyle.copyWith(
+                      fontSize: 12,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  name,
-                  style: primaryTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: semiBold,
+                  const SizedBox(height: 6),
+                  Text(
+                    name,
+                    style: primaryTextStyle.copyWith(
+                      fontSize: 16,
+                      fontWeight: semiBold,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  price,
-                  style: priceTextStyle.copyWith(
-                    fontWeight: medium,
+                  const SizedBox(height: 6),
+                  Text(
+                    price,
+                    style: priceTextStyle.copyWith(
+                      fontWeight: medium,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -212,64 +217,69 @@ class ProductItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-        left: defaultMargin,
-      ),
-      width: 215,
-      height: 278,
-      decoration: BoxDecoration(
-        color: const Color(0XFFECEDEF),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: defaultMargin,
-          ),
-          Image.asset(
-            img,
-            width: 215,
-            height: 150,
-            fit: BoxFit.cover,
-          ),
-          SizedBox(
-            height: 6,
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              left: 20,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, '/products');
+      },
+      child: Container(
+        margin: EdgeInsets.only(
+          left: defaultMargin,
+        ),
+        width: 215,
+        height: 278,
+        decoration: BoxDecoration(
+          color: const Color(0XFFECEDEF),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: defaultMargin,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  category,
-                  style: secondaryTextStyle.copyWith(
-                    fontSize: 12,
-                  ),
-                ),
-                Text(
-                  name,
-                  style: subtitleTextStyle.copyWith(
-                    fontSize: 18,
-                    fontWeight: semiBold,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  price,
-                  style: priceTextStyle.copyWith(
-                    fontSize: 14,
-                    fontWeight: medium,
-                  ),
-                ),
-              ],
+            Image.asset(
+              img,
+              width: 215,
+              height: 150,
+              fit: BoxFit.cover,
             ),
-          )
-        ],
+            SizedBox(
+              height: 6,
+            ),
+            Container(
+              margin: const EdgeInsets.only(
+                left: 20,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    category,
+                    style: secondaryTextStyle.copyWith(
+                      fontSize: 12,
+                    ),
+                  ),
+                  Text(
+                    name,
+                    style: subtitleTextStyle.copyWith(
+                      fontSize: 18,
+                      fontWeight: semiBold,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    price,
+                    style: priceTextStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: medium,
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
