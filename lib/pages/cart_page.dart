@@ -83,21 +83,26 @@ class BottomCheckoutCartPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 )),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Continue to Checkout',
-                  style: primaryTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: semiBold,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/checkout');
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Continue to Checkout',
+                    style: primaryTextStyle.copyWith(
+                      fontSize: 16,
+                      fontWeight: semiBold,
+                    ),
                   ),
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 20,
-                ),
-              ],
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    size: 20,
+                  ),
+                ],
+              ),
             ),
           ),
           SizedBox(height: defaultMargin - 20),
