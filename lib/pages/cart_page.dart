@@ -8,23 +8,23 @@ class CartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor3,
-      appBar: _header(),
+      appBar: _header(context),
       body: HasCartProducts(),
       bottomNavigationBar: BottomCheckoutCartPage(),
     );
   }
 
-  AppBar _header() {
+  AppBar _header(context) {
     return AppBar(
       backgroundColor: bgColor1,
       elevation: 0,
       leading: IconButton(
-        onPressed: () {},
-        icon: IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.arrow_back_ios,
-          ),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: Icon(
+          Icons.arrow_back_ios,
+          size: 20,
         ),
       ),
       title: Text(

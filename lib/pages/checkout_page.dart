@@ -8,7 +8,7 @@ class CheckoutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor3,
-      appBar: _header(),
+      appBar: _header(context),
       body: ListView(
         padding: EdgeInsets.all(
           defaultMargin,
@@ -35,10 +35,12 @@ class CheckoutPage extends StatelessWidget {
     );
   }
 
-  AppBar _header() {
+  AppBar _header(ctx) {
     return AppBar(
       leading: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pop(ctx);
+        },
         icon: Icon(
           Icons.arrow_back_ios,
           size: 20,
@@ -66,7 +68,10 @@ class ButtonCheckoutPag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/checkout-success', (route) => false);
+      },
       style: ElevatedButton.styleFrom(
         primary: primaryColor,
         padding: EdgeInsets.symmetric(
