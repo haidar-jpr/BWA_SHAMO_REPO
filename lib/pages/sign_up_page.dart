@@ -1,11 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo/pages/components/loading_sign_up_btn.dart';
+import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/theme.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+import 'components/sign_up_btn.dart';
+
+class SignUpPage extends StatefulWidget {
+  SignUpPage({Key? key}) : super(key: key);
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  TextEditingController nameController = TextEditingController(text: '');
+
+  TextEditingController usernameController = TextEditingController(text: '');
+
+  TextEditingController emailController = TextEditingController(text: '');
+
+  TextEditingController passwordController = TextEditingController(text: '');
+
+  bool isLoading = false;
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    usernameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleSignUp() async {
+      setState(() {
+        isLoading = !isLoading;
+      });
+
+      if (await authProvider.register(
+        name: nameController.text,
+        username: usernameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+      )) {
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: alertColor,
+            content: Text(
+              'Failed to Register!',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      }
+
+      setState(() {
+        isLoading = !isLoading;
+      });
+    }
+
     return Scaffold(
       backgroundColor: bgColor1,
       resizeToAvoidBottomInset: false,
@@ -18,40 +78,47 @@ class SignUpPage extends StatelessWidget {
               login: 'Sign Up',
               signIn: 'Register and Happy Shoping',
             ),
-            const SignUpAcccount(
+            SignUpAcccount(
               name: 'Full Name',
               icon: 'assets/icon_name.png',
               hint: 'Your Full Name',
               obtxt: false,
               margin: 50,
+              controller: nameController,
             ),
-            const SignUpAcccount(
+            SignUpAcccount(
               name: 'Username',
               icon: 'assets/icon_username.png',
               hint: 'Your Username',
               obtxt: false,
               margin: 20,
+              controller: usernameController,
             ),
-            const SignUpAcccount(
+            SignUpAcccount(
               name: 'Email Address',
               icon: 'assets/icon_email.png',
               hint: 'Your Email Address',
               obtxt: false,
               margin: 20,
+              controller: emailController,
             ),
-            const SignUpAcccount(
+            SignUpAcccount(
               name: 'Password',
               icon: 'assets/icon_password.png',
               hint: 'Your Password',
               obtxt: true,
               margin: 20,
+              controller: passwordController,
             ),
-            SignUpButton(
-              txt: 'Sign Up',
-              to: () {
-                Navigator.pushReplacementNamed(context, '/home');
-              },
-            ),
+            isLoading
+                ? LoadingSignUpBtn(
+                    txt: 'Loading',
+                    to: () {},
+                  )
+                : SignUpButton(
+                    txt: 'Sign Up',
+                    to: handleSignUp,
+                  ),
             const Spacer(),
             ToSignIn(
               txt1: 'Already have an account?',
@@ -150,6 +217,7 @@ class SignUpAcccount extends StatelessWidget {
   final String hint;
   final double margin;
   final bool obtxt;
+  final TextEditingController controller;
 
   const SignUpAcccount(
       {Key? key,
@@ -157,7 +225,8 @@ class SignUpAcccount extends StatelessWidget {
       required this.icon,
       required this.margin,
       required this.hint,
-      required this.obtxt})
+      required this.obtxt,
+      required this.controller})
       : super(key: key);
 
   @override
@@ -198,6 +267,7 @@ class SignUpAcccount extends StatelessWidget {
                   child: TextFormField(
                     style: primaryTextStyle,
                     obscureText: obtxt,
+                    controller: controller,
                     decoration: InputDecoration.collapsed(
                       hintText: hint,
                       hintStyle: subtitleTextStyle,
@@ -208,41 +278,6 @@ class SignUpAcccount extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class SignUpButton extends StatelessWidget {
-  final String txt;
-  final VoidCallback to;
-
-  const SignUpButton({Key? key, required this.txt, required this.to})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(
-        top: 30,
-      ),
-      width: double.infinity,
-      height: 50,
-      child: TextButton(
-        onPressed: to,
-        style: TextButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          backgroundColor: primaryColor,
-        ),
-        child: Text(
-          txt,
-          style: primaryTextStyle.copyWith(
-            fontSize: 16,
-            fontWeight: medium,
-          ),
-        ),
       ),
     );
   }
