@@ -1,11 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo/pages/components/loading_btn.dart';
+import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/theme.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
 
   @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+  TextEditingController emailController = TextEditingController(text: '');
+  TextEditingController passwordController = TextEditingController(text: '');
+
+  bool isLoading = false;
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleSignIn() async {
+      setState(() {
+        isLoading = !isLoading;
+      });
+
+      if (await authProvider.login(
+        email: emailController.text,
+        password: passwordController.text,
+      )) {
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: alertColor,
+            content: const Text(
+              'Failed to Login!',
+              textAlign: TextAlign.center,
+            ),
+          ),
+        );
+      }
+
+      setState(() {
+        isLoading = !isLoading;
+      });
+    }
+
     return Scaffold(
       backgroundColor: bgColor1,
       resizeToAvoidBottomInset: false,
@@ -18,26 +67,31 @@ class SignInPage extends StatelessWidget {
               login: 'Login',
               signIn: 'Sign In to Continue',
             ),
-            const LoginAcccount(
+            LoginAcccount(
               name: 'Email Address',
               icon: 'assets/icon_email.png',
               hint: 'Your Email Address',
+              controller: emailController,
               obtxt: false,
               margin: 70,
             ),
-            const LoginAcccount(
+            LoginAcccount(
               name: 'Password',
               icon: 'assets/icon_password.png',
               hint: 'Your Password',
               obtxt: true,
+              controller: passwordController,
               margin: 20,
             ),
-            SignInButton(
-              txt: 'Sign In',
-              to: () {
-                Navigator.pushReplacementNamed(context, '/home');
-              },
-            ),
+            isLoading
+                ? LoadingBtn(
+                    txt: 'Loading',
+                    to: () {},
+                  )
+                : SignInButton(
+                    txt: 'Sign In',
+                    to: handleSignIn,
+                  ),
             const Spacer(),
             ToSignUp(
               txt1: 'Don\'t have an account?',
@@ -136,15 +190,17 @@ class LoginAcccount extends StatelessWidget {
   final String hint;
   final double margin;
   final bool obtxt;
+  final TextEditingController controller;
 
-  const LoginAcccount(
-      {Key? key,
-      required this.name,
-      required this.icon,
-      required this.margin,
-      required this.hint,
-      required this.obtxt})
-      : super(key: key);
+  const LoginAcccount({
+    Key? key,
+    required this.name,
+    required this.icon,
+    required this.margin,
+    required this.hint,
+    required this.obtxt,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -184,6 +240,7 @@ class LoginAcccount extends StatelessWidget {
                   child: TextFormField(
                     style: primaryTextStyle,
                     obscureText: obtxt,
+                    controller: controller,
                     decoration: InputDecoration.collapsed(
                       hintText: hint,
                       hintStyle: subtitleTextStyle,

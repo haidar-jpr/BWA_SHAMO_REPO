@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:shamo/models/user_model.dart';
 import 'package:shamo/services/auth_service.dart';
 
-class AuthProvider with ChangeNotifier{
-
+class AuthProvider with ChangeNotifier {
   late User _user;
 
   User get user => _user;
 
-  set user(User user){
+  set user(User user) {
     _user = user;
     notifyListeners();
   }
 
-  Future<bool> register({String name = '', String username = '', String email = '', String password = ''}) async {
+  Future<bool> register(
+      {String name = '',
+      String username = '',
+      String email = '',
+      String password = ''}) async {
     try {
       User user = await AuthService().register(
         name: name,
@@ -30,4 +33,21 @@ class AuthProvider with ChangeNotifier{
     }
   }
 
+  Future<bool> login({
+    String email = '',
+    String password = '',
+  }) async {
+    try {
+      User user = await AuthService().login(
+        email: email,
+        password: password,
+      );
+
+      _user = user;
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
 }

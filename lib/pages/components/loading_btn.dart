@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../../theme.dart';
 
-class LoadingSignUpBtn extends StatelessWidget {
+class LoadingBtn extends StatelessWidget {
   final String txt;
   final VoidCallback to;
 
-  const LoadingSignUpBtn({Key? key, required this.txt, required this.to})
+  const LoadingBtn({Key? key, required this.txt, required this.to})
       : super(key: key);
 
   @override

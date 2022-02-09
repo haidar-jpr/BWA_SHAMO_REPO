@@ -39,4 +39,35 @@ class AuthService {
       throw Exception('Gagal Register');
     }
   }
+
+
+  Future<User> login({
+    String email = '',
+    String password = '',
+  }) async {
+    Uri url = Uri.parse('$baseURL/login');
+    var headers = {'Content-Type': 'application/json'};
+    var body = jsonEncode({
+      'email': email,
+      'password': password,
+    });
+
+    var response = await http.post(
+      url,
+      headers: headers,
+      body: body,
+    );
+
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body)['data'];
+      User user = User.fromJson(data['user']);
+      user.token = 'Bearer ' + data['access_token'];
+
+      return user;
+    } else {
+      throw Exception('Gagal Login!');
+    }
+  }
 }
