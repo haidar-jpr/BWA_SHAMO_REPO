@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo/models/user_model.dart';
+import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/theme.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -129,6 +132,10 @@ class HeaderProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    User user = authProvider.user;
+
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: bgColor1,
@@ -138,9 +145,12 @@ class HeaderProfile extends StatelessWidget {
           margin: EdgeInsets.all(defaultMargin),
           child: Row(
             children: [
-              Image.asset(
-                'assets/icon_default_wall.png',
-                width: 64,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Image.network(
+                  '${user.profilePhotoUrl}',
+                  width: 64,
+                ),
               ),
               SizedBox(width: 16),
               Expanded(
@@ -148,7 +158,7 @@ class HeaderProfile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Hallo, Subhan Ikraam Haidar',
+                      'Hallo, ${user.name}',
                       style: primaryTextStyle.copyWith(
                         fontWeight: semiBold,
                         fontSize: 20,
@@ -158,7 +168,7 @@ class HeaderProfile extends StatelessWidget {
                     ),
                     FittedBox(
                       child: Text(
-                        'haidar.dod@gmail.com',
+                        '${user.email}',
                         style: subtitleTextStyle.copyWith(
                           fontSize: 16,
                         ),

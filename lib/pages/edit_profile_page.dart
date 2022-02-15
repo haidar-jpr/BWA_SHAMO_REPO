@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo/models/user_model.dart';
+import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/theme.dart';
 
 class EditProfilePage extends StatelessWidget {
@@ -6,6 +9,10 @@ class EditProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    User user = authProvider.user;
+
     return Scaffold(
       backgroundColor: bgColor3,
       resizeToAvoidBottomInset: false,
@@ -20,22 +27,26 @@ class EditProfilePage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  'assets/icon_default_wall.png',
-                  width: 100,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: Image.network(
+                    '${user.profilePhotoUrl}',
+                    fit: BoxFit.cover,
+                    width: 100,
+                  ),
                 ),
                 SizedBox(height: defaultMargin),
                 InputEditProfile(
                   name: 'Name',
-                  hint: 'Subhan Ikraam Haidar',
+                  hint: '${user.name}',
                 ),
                 InputEditProfile(
                   name: 'Username',
-                  hint: '@Haidar',
+                  hint: '@${user.username}',
                 ),
                 InputEditProfile(
                   name: 'Email Address',
-                  hint: 'haidar.dod@gmail.com',
+                  hint: '${user.email}',
                 ),
               ],
             ),

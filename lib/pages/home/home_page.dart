@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo/models/products_model.dart';
+import 'package:shamo/models/user_model.dart';
+import 'package:shamo/providers/auth_provider.dart';
+import 'package:shamo/providers/products_provider.dart';
 import 'package:shamo/theme.dart';
 
 class HomePage extends StatelessWidget {
@@ -168,6 +173,8 @@ class CardProductsHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProductsProvider productsProvider = Provider.of<ProductsProvider>(context);
+
     return Container(
       margin: EdgeInsets.only(
         bottom: defaultMargin,
@@ -175,26 +182,13 @@ class CardProductsHome extends StatelessWidget {
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
-          children: const [
-            ProductItems(
-              img: 'assets/img_shoes.png',
-              category: 'Hiking',
-              name: 'COURT VISION 2.0',
-              price: '\$58,67',
-            ),
-            ProductItems(
-              img: 'assets/img_shoes.png',
-              category: 'Hiking',
-              name: 'COURT VISION 2.0',
-              price: '\$58,67',
-            ),
-            ProductItems(
-              img: 'assets/img_shoes.png',
-              category: 'Hiking',
-              name: 'COURT VISION 2.0',
-              price: '\$58,67',
-            ),
-          ],
+          children: productsProvider.products
+              .map(
+                (products) => ProductItems(
+                  products: products,
+                ),
+              )
+              .toList(),
         ),
       ),
     );
@@ -204,19 +198,14 @@ class CardProductsHome extends StatelessWidget {
 class ProductItems extends StatelessWidget {
   const ProductItems({
     Key? key,
-    required this.img,
-    required this.category,
-    required this.name,
-    required this.price,
+    this.products,
   }) : super(key: key);
 
-  final String img;
-  final String category;
-  final String name;
-  final String price;
+  final Products? products;
 
   @override
   Widget build(BuildContext context) {
+    
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, '/products');
@@ -237,13 +226,14 @@ class ProductItems extends StatelessWidget {
             SizedBox(
               height: defaultMargin,
             ),
-            Image.asset(
-              img,
+            Image.network(
+              '${products?.galleries?[0].url}',
+              // 'assets/img_shoes.png',
               width: 215,
               height: 150,
               fit: BoxFit.cover,
             ),
-            SizedBox(
+            const SizedBox(
               height: 6,
             ),
             Container(
@@ -254,13 +244,15 @@ class ProductItems extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    category,
+                    '${products!.category?.name}',
+                    // 'nama produk category',
                     style: secondaryTextStyle.copyWith(
                       fontSize: 12,
                     ),
                   ),
                   Text(
-                    name,
+                    '${products?.name}',
+                    // 'nama produk',
                     style: subtitleTextStyle.copyWith(
                       fontSize: 18,
                       fontWeight: semiBold,
@@ -269,7 +261,8 @@ class ProductItems extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
-                    price,
+                    '\$${products?.price}',
+                    // 'harga',  
                     style: priceTextStyle.copyWith(
                       fontSize: 14,
                       fontWeight: medium,
@@ -292,6 +285,7 @@ class PopularProductsHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       margin: EdgeInsets.only(
         left: defaultMargin,
@@ -421,6 +415,9 @@ class HeaderHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    User user = authProvider.user;
+
     return Container(
       margin: EdgeInsets.all(
         defaultMargin,
@@ -434,7 +431,7 @@ class HeaderHomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Hallo, Subhan Ikraam Haidar',
+                  'Hallo, ${user.name}',
                   style: primaryTextStyle.copyWith(
                     fontSize: 24,
                     fontWeight: semiBold,
@@ -443,7 +440,7 @@ class HeaderHomePage extends StatelessWidget {
                   maxLines: 2,
                 ),
                 Text(
-                  'haidar.dod@gmail.com',
+                  '${user.email}',
                   style: subtitleTextStyle.copyWith(
                     fontSize: 16,
                     overflow: TextOverflow.ellipsis,
@@ -453,11 +450,13 @@ class HeaderHomePage extends StatelessWidget {
               ],
             ),
           ),
-          // SizedBox(width: 100),
-          Image.asset(
-            'assets/icon_default_wall.png',
-            width: 54,
-            height: 54,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: Image.network(
+              '${user.profilePhotoUrl}',
+              width: 54,
+              height: 54,
+            ),
           ),
         ],
       ),
