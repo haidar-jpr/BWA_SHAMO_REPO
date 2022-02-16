@@ -1,9 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:shamo/models/products_model.dart';
 import 'package:shamo/theme.dart';
 
 class ProductsPage extends StatelessWidget {
-  ProductsPage({Key? key}) : super(key: key);
+  ProductsPage({
+    Key? key,
+    this.products,
+  }) : super(key: key);
+
+  final Products? products;
 
   final List images = [
     'assets/img_shoes.png',
@@ -13,14 +19,14 @@ class ProductsPage extends StatelessWidget {
 
   final List familiarShoes = [
     'assets/img_shoes.png',
-    'assets/img_shoes.png',
-    'assets/img_shoes.png',
-    'assets/img_shoes.png',
-    'assets/img_shoes.png',
-    'assets/img_shoes.png',
-    'assets/img_shoes.png',
-    'assets/img_shoes.png',
-    'assets/img_shoes.png',
+    'assets/img_shoes2.png',
+    'assets/img_shoes3.png',
+    'assets/img_shoes4.png',
+    'assets/img_shoes5.png',
+    'assets/img_shoes6.png',
+    'assets/img_shoes7.png',
+    'assets/img_shoes8.png',
+    'assets/img_shoes9.png',
   ];
 
   @override
@@ -30,9 +36,9 @@ class ProductsPage extends StatelessWidget {
       body: ListView(
         children: [
           ImageSliderProducts(
-            images: images,
+            products: products,
           ),
-          ContentProduct(familiarShoes: familiarShoes),
+          ContentProduct(familiarShoes: familiarShoes, products: products,),
         ],
       ),
     );
@@ -42,10 +48,11 @@ class ProductsPage extends StatelessWidget {
 class ContentProduct extends StatelessWidget {
   const ContentProduct({
     Key? key,
-    required this.familiarShoes,
+    required this.familiarShoes, this.products,
   }) : super(key: key);
 
   final List familiarShoes;
+  final Products? products;
 
   @override
   Widget build(BuildContext context) {
@@ -74,14 +81,14 @@ class ContentProduct extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'TERREX URBAN LOW',
+                    '${products?.name}',
                     style: primaryTextStyle.copyWith(
                       fontSize: 18,
                       fontWeight: semiBold,
                     ),
                   ),
                   Text(
-                    'Hiking',
+                    '${products?.category?.name}',
                     style: subtitleTextStyle.copyWith(
                       fontSize: 12,
                     ),
@@ -117,7 +124,7 @@ class ContentProduct extends StatelessWidget {
                   style: primaryTextStyle,
                 ),
                 Text(
-                  '\$143,98',
+                  '\$${products?.price}',
                   style: priceTextStyle.copyWith(
                     fontWeight: semiBold,
                     fontSize: 16,
@@ -138,7 +145,7 @@ class ContentProduct extends StatelessWidget {
           ),
           Container(
             child: Text(
-              "Unpaved trails and mixed surfaces are easy when you have the traction and support you need. Casual enough for the daily commute.",
+              '${products?.description}',
               style: subtitleTextStyle.copyWith(
                 fontWeight: light,
               ),
@@ -257,10 +264,10 @@ class FamiliarCardProducts extends StatelessWidget {
 class ImageSliderProducts extends StatefulWidget {
   const ImageSliderProducts({
     Key? key,
-    required this.images,
+    this.products,
   }) : super(key: key);
 
-  final List images;
+  final Products? products;
 
   @override
   State<ImageSliderProducts> createState() => _ImageSliderProductsState();
@@ -301,10 +308,10 @@ class _ImageSliderProductsState extends State<ImageSliderProducts> {
           ),
         ),
         CarouselSlider(
-          items: widget.images
-              .map(
-                (image) => Image.asset(
-                  image,
+          items: widget.products?.galleries
+              ?.map(
+                (image) => Image.network(
+                  '${image.url}',
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: 300,
@@ -325,13 +332,13 @@ class _ImageSliderProductsState extends State<ImageSliderProducts> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: widget.images.map((_) {
+          children: widget.products!.galleries?.map((_) {
             index++;
             return IndicatorSliderProducts(
               index: index,
               currentIndex: currentIndex,
             );
-          }).toList(),
+          },).toList() as List<Widget>,
         ),
       ],
     );
@@ -341,12 +348,12 @@ class _ImageSliderProductsState extends State<ImageSliderProducts> {
 class IndicatorSliderProducts extends StatelessWidget {
   const IndicatorSliderProducts({
     Key? key,
-    required this.index,
-    required this.currentIndex,
+    this.index,
+    this.currentIndex,
   }) : super(key: key);
 
-  final int index;
-  final int currentIndex;
+  final int? index;
+  final int? currentIndex;
 
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo/models/products_model.dart';
 import 'package:shamo/models/user_model.dart';
+import 'package:shamo/pages/products_page.dart';
 import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/providers/products_provider.dart';
 import 'package:shamo/theme.dart';
@@ -34,6 +35,8 @@ class NewArrivalSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProductsProvider productsProvider = Provider.of<ProductsProvider>(context);
+
     return Container(
       margin: EdgeInsets.only(
         top: 14,
@@ -41,32 +44,13 @@ class NewArrivalSection extends StatelessWidget {
         right: defaultMargin,
       ),
       child: Wrap(
-        children: const [
-          NewArrivalItems(
-            img: 'assets/img_shoes.png',
-            category: 'FootBall',
-            name: 'Predator 20.3 Firm Ground',
-            price: '\$68,47',
-          ),
-          NewArrivalItems(
-            img: 'assets/img_shoes.png',
-            category: 'FootBall',
-            name: 'Predator 20.3 Firm Ground',
-            price: '\$68,47',
-          ),
-          NewArrivalItems(
-            img: 'assets/img_shoes.png',
-            category: 'FootBall',
-            name: 'Predator 20.3 Firm Ground',
-            price: '\$68,47',
-          ),
-          NewArrivalItems(
-            img: 'assets/img_shoes.png',
-            category: 'FootBall',
-            name: 'Predator 20.3 Firm Ground',
-            price: '\$68,47',
-          ),
-        ],
+        children: productsProvider.products
+            .map(
+              (products) => NewArrivalItems(
+                products: products,
+              ),
+            )
+            .toList(),
       ),
     );
   }
@@ -75,22 +59,23 @@ class NewArrivalSection extends StatelessWidget {
 class NewArrivalItems extends StatelessWidget {
   const NewArrivalItems({
     Key? key,
-    required this.img,
-    required this.category,
-    required this.name,
-    required this.price,
+    this.products,
   }) : super(key: key);
 
-  final String img;
-  final String category;
-  final String name;
-  final String price;
+  final Products? products;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/products');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (ctx) => ProductsPage(
+              products: products,
+            ),
+          ),
+        );
       },
       child: Container(
         margin: EdgeInsets.only(bottom: defaultMargin),
@@ -98,8 +83,8 @@ class NewArrivalItems extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                img,
+              child: Image.network(
+                '${products?.galleries?[0].url}',
                 width: 120,
                 height: 120,
                 fit: BoxFit.cover,
@@ -111,14 +96,14 @@ class NewArrivalItems extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    category,
+                    '${products?.category?.name}',
                     style: secondaryTextStyle.copyWith(
                       fontSize: 12,
                     ),
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    name,
+                    '${products?.name}',
                     style: primaryTextStyle.copyWith(
                       fontSize: 16,
                       fontWeight: semiBold,
@@ -128,7 +113,7 @@ class NewArrivalItems extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    price,
+                    '\$${products?.price}',
                     style: priceTextStyle.copyWith(
                       fontWeight: medium,
                     ),
@@ -205,10 +190,16 @@ class ProductItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/products');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (ctx) => ProductsPage(
+              products: products,
+            ),
+          ),
+        );
       },
       child: Container(
         margin: EdgeInsets.only(
@@ -262,7 +253,7 @@ class ProductItems extends StatelessWidget {
                   ),
                   Text(
                     '\$${products?.price}',
-                    // 'harga',  
+                    // 'harga',
                     style: priceTextStyle.copyWith(
                       fontSize: 14,
                       fontWeight: medium,
@@ -285,7 +276,6 @@ class PopularProductsHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       margin: EdgeInsets.only(
         left: defaultMargin,
