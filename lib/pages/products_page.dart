@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shamo/models/products_model.dart';
+import 'package:shamo/providers/wishlist_provider.dart';
 import 'package:shamo/theme.dart';
 
 class ProductsPage extends StatelessWidget {
@@ -38,24 +40,114 @@ class ProductsPage extends StatelessWidget {
           ImageSliderProducts(
             products: products,
           ),
-          ContentProduct(familiarShoes: familiarShoes, products: products,),
+          ContentProduct(
+            familiarShoes: familiarShoes,
+            products: products,
+          ),
         ],
       ),
     );
   }
 }
 
-class ContentProduct extends StatelessWidget {
+class ContentProduct extends StatefulWidget {
   const ContentProduct({
     Key? key,
-    required this.familiarShoes, this.products,
+    required this.familiarShoes,
+    this.products,
   }) : super(key: key);
 
   final List familiarShoes;
   final Products? products;
 
   @override
+  State<ContentProduct> createState() => _ContentProductState();
+}
+
+class _ContentProductState extends State<ContentProduct> {
+  @override
   Widget build(BuildContext context) {
+    Future<void> showSuccessDialog() async {
+      return showDialog(
+        context: context,
+        builder: (BuildContext context) => Container(
+          width: MediaQuery.of(context).size.width - (2 * defaultMargin),
+          child: AlertDialog(
+            backgroundColor: bgColor1,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.close,
+                        color: primaryTextColor,
+                      ),
+                    ),
+                  ),
+                  Image.asset(
+                    'assets/icon_sucesss.png',
+                    width: 100,
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    'Hurray :)',
+                    style: primaryTextStyle.copyWith(
+                      fontSize: 18,
+                      fontWeight: semiBold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    'Item added successfully',
+                    style: secondaryTextStyle,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: 154,
+                    height: 44,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/cart');
+                      },
+                      style: TextButton.styleFrom(
+                        backgroundColor: primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: Text(
+                        'View My Cart',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 16,
+                          fontWeight: medium,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    WishlistProvider wishlist = Provider.of<WishlistProvider>(context);
+
     return Container(
       width: double.infinity,
       margin: EdgeInsets.only(
@@ -81,14 +173,14 @@ class ContentProduct extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${products?.name}',
+                    '${widget.products?.name}',
                     style: primaryTextStyle.copyWith(
                       fontSize: 18,
                       fontWeight: semiBold,
                     ),
                   ),
                   Text(
-                    '${products?.category?.name}',
+                    '${widget.products?.category?.name}',
                     style: subtitleTextStyle.copyWith(
                       fontSize: 12,
                     ),
@@ -96,9 +188,34 @@ class ContentProduct extends StatelessWidget {
                 ],
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  wishlist.setProduct(widget.products!);
+                  if (wishlist.isWishlist(widget.products!)) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: secondaryColor,
+                        content: Text(
+                          'Has been added to the Wishlist',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: alertColor,
+                        content: Text(
+                          'Has been removed from the Wishlist',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
+                  }
+                },
                 icon: Image.asset(
-                  'assets/icon_wistlist.png',
+                  wishlist.isWishlist(widget.products!)
+                      ? 'assets/icon_wistlist_blue.png'
+                      : 'assets/icon_wistlist.png',
                   width: 46,
                 ),
               ),
@@ -124,7 +241,7 @@ class ContentProduct extends StatelessWidget {
                   style: primaryTextStyle,
                 ),
                 Text(
-                  '\$${products?.price}',
+                  '\$${widget.products?.price}',
                   style: priceTextStyle.copyWith(
                     fontWeight: semiBold,
                     fontSize: 16,
@@ -145,7 +262,7 @@ class ContentProduct extends StatelessWidget {
           ),
           Container(
             child: Text(
-              '${products?.description}',
+              '${widget.products?.description}',
               style: subtitleTextStyle.copyWith(
                 fontWeight: light,
               ),
@@ -170,7 +287,7 @@ class ContentProduct extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
-              children: familiarShoes
+              children: widget.familiarShoes
                   .map(
                     (image) => FamiliarCardProducts(
                       imageUrl: image,
@@ -210,7 +327,9 @@ class ContentProduct extends StatelessWidget {
                 ),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showSuccessDialog();
+                    },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(
                         vertical: 12,
@@ -332,13 +451,15 @@ class _ImageSliderProductsState extends State<ImageSliderProducts> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: widget.products!.galleries?.map((_) {
-            index++;
-            return IndicatorSliderProducts(
-              index: index,
-              currentIndex: currentIndex,
-            );
-          },).toList() as List<Widget>,
+          children: widget.products!.galleries?.map(
+            (_) {
+              index++;
+              return IndicatorSliderProducts(
+                index: index,
+                currentIndex: currentIndex,
+              );
+            },
+          ).toList() as List<Widget>,
         ),
       ],
     );

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo/models/products_model.dart';
+import 'package:shamo/providers/wishlist_provider.dart';
 import 'package:shamo/theme.dart';
 
 class WishlistPage extends StatelessWidget {
@@ -6,14 +9,17 @@ class WishlistPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WishlistProvider wishlistProvider = Provider.of<WishlistProvider>(context);
+
     return Scaffold(
       backgroundColor: bgColor3,
       appBar: _appbarWishlist(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // EmptyWishlist(),
-          FavoriteWistlist()
+          wishlistProvider.wishlist.length == 0
+              ? EmptyWishlist()
+              : FavoriteWistlist()
         ],
       ),
     );
@@ -43,6 +49,8 @@ class FavoriteWistlist extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WishlistProvider wishlistProvider = Provider.of<WishlistProvider>(context);
+
     return Expanded(
       child: Container(
         width: double.infinity,
@@ -50,20 +58,11 @@ class FavoriteWistlist extends StatelessWidget {
           padding: EdgeInsets.symmetric(
             horizontal: defaultMargin,
           ),
-          children: [
-            CardProductWistlist(),
-            CardProductWistlist(),
-            CardProductWistlist(),
-            CardProductWistlist(),
-            CardProductWistlist(),
-            CardProductWistlist(),
-            CardProductWistlist(),
-            CardProductWistlist(),
-            CardProductWistlist(),
-            CardProductWistlist(),
-            CardProductWistlist(),
-            CardProductWistlist(),
-          ],
+          children: wishlistProvider.wishlist
+              .map(
+                (product) => CardProductWistlist(products: product,),
+              )
+              .toList(),
         ),
       ),
     );
@@ -71,12 +70,18 @@ class FavoriteWistlist extends StatelessWidget {
 }
 
 class CardProductWistlist extends StatelessWidget {
-  const CardProductWistlist({
+  CardProductWistlist({
+    this.products,
     Key? key,
   }) : super(key: key);
 
+  final Products? products;
+
   @override
   Widget build(BuildContext context) {
+
+    WishlistProvider wishlistProvider = Provider.of<WishlistProvider>(context);
+
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 10,
@@ -93,8 +98,8 @@ class CardProductWistlist extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              'assets/img_shoes.png',
+            child: Image.network(
+              '${products?.galleries?[0].url}',
               width: 60,
             ),
           ),
@@ -105,7 +110,7 @@ class CardProductWistlist extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Terrex Urban Low',
+                  '${products?.name}',
                   style: primaryTextStyle.copyWith(
                     fontWeight: semiBold,
                   ),
@@ -113,15 +118,20 @@ class CardProductWistlist extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  '\$143,98',
+                  '\$${products?.price}',
                   style: priceTextStyle,
                 ),
               ],
             ),
           ),
-          Image.asset(
-            'assets/icon_wistlist_blue.png',
-            width: 34,
+          GestureDetector(
+            onTap: (){
+              wishlistProvider.setProduct(products!);
+            },
+            child: Image.asset(
+              'assets/icon_wistlist_blue.png',
+              width: 34,
+            ),
           ),
         ],
       ),
