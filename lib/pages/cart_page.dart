@@ -211,7 +211,7 @@ class CardCart extends StatelessWidget {
                   ),
                   SizedBox(height: 2),
                   Text(
-                    cart!.quantity.toString(),
+                    '${cart!.quantity}',
                     style: primaryTextStyle.copyWith(
                       fontWeight: medium,
                     ),
