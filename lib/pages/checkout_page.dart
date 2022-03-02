@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo/models/cart_model.dart';
+import 'package:shamo/providers/cart_provider.dart';
 import 'package:shamo/theme.dart';
 
 class CheckoutPage extends StatelessWidget {
@@ -6,6 +9,8 @@ class CheckoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
+
     return Scaffold(
       backgroundColor: bgColor3,
       appBar: _header(context),
@@ -14,11 +19,25 @@ class CheckoutPage extends StatelessWidget {
           defaultMargin,
         ),
         children: [
-          TittleCheckoutPage(
-            name: 'List Items',
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TittleCheckoutPage(
+                  name: 'List Items',
+                ),
+                Column(
+                  children: cartProvider.carts
+                      .map(
+                        (cart) => ContentCheckoutPage(
+                          cart: cart,
+                        ),
+                      )
+                      .toList(),
+                ),
+              ],
+            ),
           ),
-          SizedBox(height: 12),
-          ContentCheckoutPage(),
           SizedBox(height: defaultMargin),
           AddressCheckoutPage(),
           SizedBox(height: defaultMargin),
@@ -99,6 +118,9 @@ class SummaryCheckoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
+
     return Container(
       padding: EdgeInsets.all(
         defaultMargin,
@@ -116,12 +138,12 @@ class SummaryCheckoutPage extends StatelessWidget {
           SizedBox(height: 12),
           DetailPaymentCheckout(
             name: 'Product Quantity',
-            details: '2 detailss',
+            details: '${cartProvider.totalItem()} Items',
           ),
           SizedBox(height: 13),
           DetailPaymentCheckout(
             name: 'Product Price',
-            details: '\$575.96',
+            details: '\$${cartProvider.totalPrice()}',
           ),
           SizedBox(height: 13),
           DetailPaymentCheckout(
@@ -144,7 +166,7 @@ class SummaryCheckoutPage extends StatelessWidget {
                 ),
               ),
               Text(
-                '\$575.92',
+                '\$${cartProvider.totalPrice()}',
                 style: priceTextStyle.copyWith(
                   fontWeight: semiBold,
                 ),
@@ -288,11 +310,17 @@ class LocationCheckoutPage extends StatelessWidget {
 class ContentCheckoutPage extends StatelessWidget {
   const ContentCheckoutPage({
     Key? key,
+    this.cart,
   }) : super(key: key);
+
+  final CartModel? cart;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(
+        top: defaultMargin - 20,
+      ),
       padding: EdgeInsets.symmetric(
         horizontal: 12,
         vertical: 20,
@@ -306,8 +334,8 @@ class ContentCheckoutPage extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              'assets/img_shoes.png',
+            child: Image.network(
+              '${cart!.products!.galleries![0].url}',
               width: 60,
             ),
           ),
@@ -319,20 +347,20 @@ class ContentCheckoutPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Terrex Urban Low',
+                  '${cart!.products!.name}',
                   style: primaryTextStyle.copyWith(
                     fontWeight: semiBold,
                   ),
                 ),
                 Text(
-                  '\$143,98',
+                  '\$${cart!.products!.price}',
                   style: priceTextStyle,
                 ),
               ],
             ),
           ),
           Text(
-            '2 Items',
+            '${cart!.quantity} Items',
             style: secondaryTextStyle.copyWith(
               fontSize: 12,
             ),

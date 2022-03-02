@@ -82,7 +82,9 @@ class BottomCheckoutCartPage extends StatelessWidget {
             color: subtitleTextColor,
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/checkout');
+            },
             style: ElevatedButton.styleFrom(
                 primary: primaryColor,
                 padding: EdgeInsets.symmetric(
@@ -92,26 +94,21 @@ class BottomCheckoutCartPage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 )),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, '/checkout');
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Continue to Checkout',
-                    style: primaryTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: semiBold,
-                    ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Continue to Checkout',
+                  style: primaryTextStyle.copyWith(
+                    fontSize: 16,
+                    fontWeight: semiBold,
                   ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 20,
-                  ),
-                ],
-              ),
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  size: 20,
+                ),
+              ],
             ),
           ),
           SizedBox(height: defaultMargin - 20),
@@ -128,6 +125,7 @@ class HasCartProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     CartProvider cartProvider = Provider.of<CartProvider>(context);
 
     return ListView(
@@ -158,6 +156,7 @@ class CardCart extends StatelessWidget {
 
     return Container(
       width: double.infinity,
+      margin: EdgeInsets.only(bottom: 20),
       padding: EdgeInsets.symmetric(
         horizontal: 16,
         vertical: 10,
@@ -253,7 +252,9 @@ class CardCart extends StatelessWidget {
             ),
           ),
         ],
+        
       ),
+      
     );
   }
 }
