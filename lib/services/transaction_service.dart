@@ -10,7 +10,7 @@ class TransactionService {
       String token, List<CartModel> carts, double totalPrice) async {
     var url = Uri.parse('$baseURL/checkout');
     var headers = {
-      'Content-Type': 'application-json',
+      'Content-Type': 'application/json',
       'Authorization': token,
     };
 

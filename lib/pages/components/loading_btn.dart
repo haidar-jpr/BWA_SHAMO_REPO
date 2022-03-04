@@ -4,16 +4,16 @@ import '../../theme.dart';
 
 class LoadingBtn extends StatelessWidget {
   final String txt;
-  final VoidCallback to;
+  final VoidCallback? to;
 
-  const LoadingBtn({Key? key, required this.txt, required this.to})
+  const LoadingBtn({Key? key, required this.txt, this.to})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
-        top: 30,
+      margin: EdgeInsets.only(
+        top: defaultMargin,
       ),
       width: double.infinity,
       height: 50,

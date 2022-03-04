@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo/models/cart_model.dart';
+import 'package:shamo/pages/components/loading_btn.dart';
+import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/providers/cart_provider.dart';
+import 'package:shamo/providers/transaction_provider.dart';
 import 'package:shamo/theme.dart';
 
 class CheckoutPage extends StatelessWidget {
@@ -48,7 +51,7 @@ class CheckoutPage extends StatelessWidget {
             color: bgColor2,
           ),
           SizedBox(height: defaultMargin),
-          ButtonCheckoutPag(),
+          ButtonCheckoutPage(),
         ],
       ),
     );
@@ -79,32 +82,64 @@ class CheckoutPage extends StatelessWidget {
   }
 }
 
-class ButtonCheckoutPag extends StatelessWidget {
-  const ButtonCheckoutPag({
+class ButtonCheckoutPage extends StatefulWidget {
+  const ButtonCheckoutPage({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<ButtonCheckoutPage> createState() => _ButtonCheckoutPageState();
+}
+
+class _ButtonCheckoutPageState extends State<ButtonCheckoutPage> {
+  bool isLoading = false;
+
+  @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
+    TransactionProvider transactionProvider =
+        Provider.of<TransactionProvider>(context);
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+
+    handleCheckout() async {
+      setState(() {
+        isLoading = true;
+      });
+
+      if (await transactionProvider.checkout(
+        authProvider.user.token!,
+        cartProvider.carts,
+        cartProvider.totalPrice(),
+      )) {
+        cartProvider.carts = [];
         Navigator.pushNamedAndRemoveUntil(
             context, '/checkout-success', (route) => false);
-      },
-      style: ElevatedButton.styleFrom(
-        primary: primaryColor,
-        padding: EdgeInsets.symmetric(
-          vertical: 13,
+      }
+
+      setState(() {
+        isLoading = false;
+      });
+    }
+
+    return isLoading ? LoadingBtn(txt: 'Loading') : Container(
+      margin: EdgeInsets.only(top: defaultMargin),
+      child: ElevatedButton(
+        onPressed: handleCheckout,
+        style: ElevatedButton.styleFrom(
+          primary: primaryColor,
+          padding: EdgeInsets.symmetric(
+            vertical: 11,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-      ),
-      child: Text(
-        'Checkout Now',
-        style: primaryTextStyle.copyWith(
-          fontSize: 16,
-          fontWeight: semiBold,
+        child: Text(
+          'Checkout Now',
+          style: primaryTextStyle.copyWith(
+            fontSize: 16,
+            fontWeight: semiBold,
+          ),
         ),
       ),
     );
@@ -118,7 +153,6 @@ class SummaryCheckoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     CartProvider cartProvider = Provider.of<CartProvider>(context);
 
     return Container(
