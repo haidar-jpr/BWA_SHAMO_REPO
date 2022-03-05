@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo/models/products_model.dart';
 import 'package:shamo/pages/components/chat_buble.dart';
+import 'package:shamo/providers/products_provider.dart';
 import 'package:shamo/theme.dart';
 
 class DetailChatPage extends StatelessWidget {
-  const DetailChatPage({Key? key}) : super(key: key);
+  const DetailChatPage({Key? key, this.products}) : super(key: key);
+
+  final Products? products;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor3,
       appBar: _appBar(),
-      bottomNavigationBar: InputChat(),
+      bottomNavigationBar: InputChat(
+        products: products,
+      ),
       body: Content(),
     );
   }
@@ -98,12 +105,19 @@ class Content extends StatelessWidget {
   }
 }
 
-class ProductPreview extends StatelessWidget {
-  const ProductPreview({Key? key}) : super(key: key);
+class ProductPreview extends StatefulWidget {
+  ProductPreview({Key? key, this.products}) : super(key: key);
+
+  Products? products;
 
   @override
+  State<ProductPreview> createState() => _ProductPreviewState();
+}
+
+class _ProductPreviewState extends State<ProductPreview> {
+  @override
   Widget build(BuildContext context) {
-    return Container(
+    return widget.products?.id == null ? SizedBox() : Container(
       width: 225,
       height: 74,
       margin: EdgeInsets.only(
@@ -119,8 +133,8 @@ class ProductPreview extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              'assets/icon_white_shoes.png',
+            child: Image.network(
+              '${widget.products?.galleries?[0].url}',
               width: 54,
             ),
           ),
@@ -133,19 +147,27 @@ class ProductPreview extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'COURT VISIO...',
+                  '${widget.products?.name}',
                   style: primaryTextStyle,
+                  maxLines: 1,
                 ),
                 Text(
-                  '\$57,15',
+                  '\$${widget.products?.price}',
                   style: priceTextStyle.copyWith(fontWeight: medium),
                 ),
               ],
             ),
           ),
-          Image.asset(
-            'assets/icon_close_product.png',
-            width: 22,
+          GestureDetector(
+            onTap: (){
+              setState(() {
+                widget.products = UninitializedProductModel();
+              });
+            },
+            child: Image.asset(
+              'assets/icon_close_product.png',
+              width: 22,
+            ),
           ),
         ],
       ),
@@ -153,11 +175,19 @@ class ProductPreview extends StatelessWidget {
   }
 }
 
-class InputChat extends StatelessWidget {
+class InputChat extends StatefulWidget {
   const InputChat({
     Key? key,
+    this.products,
   }) : super(key: key);
 
+  final Products? products;
+
+  @override
+  State<InputChat> createState() => _InputChatState();
+}
+
+class _InputChatState extends State<InputChat> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -166,7 +196,7 @@ class InputChat extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ProductPreview(),
+          widget.products is UninitializedProductModel ? SizedBox() : ProductPreview(products: widget.products,),
           Row(
             children: [
               Expanded(

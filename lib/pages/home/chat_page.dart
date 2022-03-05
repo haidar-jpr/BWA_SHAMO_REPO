@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shamo/models/products_model.dart';
+import 'package:shamo/pages/components/detail_chat.dart';
+import 'package:shamo/providers/products_provider.dart';
 import 'package:shamo/theme.dart';
 
 class ChatPage extends StatelessWidget {
@@ -6,6 +10,7 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProductsProvider products = Provider.of<ProductsProvider>(context);
     return Scaffold(
       backgroundColor: bgColor3,
       body: Column(
@@ -26,10 +31,18 @@ class HaveChat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Expanded(
       child: GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, '/detail-chat');
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (ctx) => DetailChatPage(
+                products: UninitializedProductModel(),
+              ),
+            ),
+          );
         },
         child: Container(
           width: double.infinity,

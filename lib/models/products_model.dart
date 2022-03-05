@@ -58,3 +58,5 @@ class Products {
     };
   }
 }
+
+class UninitializedProductModel extends Products {}
