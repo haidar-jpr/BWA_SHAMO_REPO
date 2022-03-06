@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => const SplashPage(),
           '/sign-in': (context) => const SignInPage(),
-          '/sign-up': (context) => SignUpPage(),
+          '/sign-up': (context) => const SignUpPage(),
           '/home': (context) => const MainPage(),
           '/edit-profile': (context) => const EditProfilePage(),
           '/cart-page': (context) => const CartPage(),
