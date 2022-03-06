@@ -28,19 +28,19 @@ class ContentProfile extends StatelessWidget {
                 fontWeight: semiBold,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             AccountSettings(
               name: 'Edit Profile',
               action: () {
                 Navigator.pushNamed(context, '/edit-profile');
               },
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             AccountSettings(
               name: 'Your Orders',
               action: () {},
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             AccountSettings(
               name: 'Help',
               action: () {},
@@ -53,17 +53,17 @@ class ContentProfile extends StatelessWidget {
                 fontWeight: semiBold,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             AccountSettings(
               name: 'Privacy & Policy',
               action: () {},
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             AccountSettings(
               name: 'Term of Service',
               action: () {},
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             AccountSettings(
               name: 'Rate App',
               action: () {},

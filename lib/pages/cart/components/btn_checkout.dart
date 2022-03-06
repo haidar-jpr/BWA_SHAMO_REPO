@@ -46,13 +46,13 @@ class _ButtonCheckoutPageState extends State<ButtonCheckoutPage> {
       });
     }
 
-    return isLoading ? LoadingBtn(txt: 'Loading') : Container(
+    return isLoading ? const LoadingBtn(txt: 'Loading') : Container(
       margin: EdgeInsets.only(top: defaultMargin),
       child: ElevatedButton(
         onPressed: handleCheckout,
         style: ElevatedButton.styleFrom(
           primary: primaryColor,
-          padding: EdgeInsets.symmetric(
+          padding: const EdgeInsets.symmetric(
             vertical: 11,
           ),
           shape: RoundedRectangleBorder(

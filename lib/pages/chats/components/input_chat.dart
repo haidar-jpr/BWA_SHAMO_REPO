@@ -47,7 +47,7 @@ class _InputChatState extends State<InputChat> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           widget.products is UninitializedProductModel
-              ? SizedBox()
+              ? const SizedBox()
               : ProductPreview(
                   products: widget.products,
                 ),

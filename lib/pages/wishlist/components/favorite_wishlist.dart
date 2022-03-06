@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/wishlist_provider.dart';
 import '../../../theme.dart';
-import '../main/wishtlist_page.dart';
 import 'cart_products.dart';
 
 class FavoriteWistlist extends StatelessWidget {
@@ -16,7 +15,7 @@ class FavoriteWistlist extends StatelessWidget {
     WishlistProvider wishlistProvider = Provider.of<WishlistProvider>(context);
 
     return Expanded(
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: ListView(
           padding: EdgeInsets.symmetric(

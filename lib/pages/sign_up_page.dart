@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shamo/pages/components/loading_btn.dart';
+import 'package:shamo/pages/cart/components/loading_btn.dart';
 import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/theme.dart';
 
-import 'components/sign_up_btn.dart';
+import 'cart/components/sign_up_btn.dart';
 
 class SignUpPage extends StatefulWidget {
-  SignUpPage({Key? key}) : super(key: key);
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -53,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: alertColor,
-            content: Text(
+            content: const Text(
               'Failed to Register!',
               textAlign: TextAlign.center,
             ),

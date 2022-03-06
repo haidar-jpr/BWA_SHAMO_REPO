@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shamo/pages/components/loading_btn.dart';
+import 'package:shamo/pages/cart/components/loading_btn.dart';
 import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/theme.dart';
 

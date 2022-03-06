@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../theme.dart';
+import '../../../theme.dart';
 
 class LoadingBtn extends StatelessWidget {
   final String txt;
@@ -37,7 +37,7 @@ class LoadingBtn extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Text(
               txt,
               style: primaryTextStyle.copyWith(

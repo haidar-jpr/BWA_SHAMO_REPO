@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../../providers/products_provider.dart';
 import '../../../theme.dart';
 import 'products_item.dart';
-import '../main/home_page.dart';
 
 class CardProductsHome extends StatelessWidget {
   const CardProductsHome({

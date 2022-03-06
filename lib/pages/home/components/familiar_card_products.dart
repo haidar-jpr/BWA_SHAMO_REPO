@@ -10,7 +10,7 @@ class FamiliarCardProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 54,
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         right: 16,
       ),
       child: ClipRRect(

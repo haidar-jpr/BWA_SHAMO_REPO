@@ -14,23 +14,17 @@ class MassageService {
           .snapshots()
           .map((QuerySnapshot list) {
         var result = list.docs.map<MassageModel>((DocumentSnapshot m) {
-          print('${m.data()}');
           return MassageModel.fromJson(m.data() as Map<String, dynamic>);
         }).toList();
-
-        print('INI RESULT ----- $result');
 
         result.sort(
           (MassageModel a, MassageModel b) =>
               a.createdAt!.compareTo(b.createdAt!),
         );
 
-        print('INI RESULT ----- $result');
-
         return result;
       });
     } catch (e) {
-      print('ERORR ---- ${e}');
       throw Exception(e);
     }
   }

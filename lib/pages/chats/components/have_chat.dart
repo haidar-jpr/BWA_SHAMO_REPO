@@ -27,7 +27,7 @@ class HaveChat extends StatelessWidget {
         if (snapshot.hasData) {
 
           if(snapshot.data!.isEmpty){
-            return EmtyChat();
+            return const EmtyChat();
           }
 
           return Expanded(
@@ -46,7 +46,7 @@ class HaveChat extends StatelessWidget {
             ),
           );
         } else {
-          return EmtyChat();
+          return const EmtyChat();
         }
       },
     );

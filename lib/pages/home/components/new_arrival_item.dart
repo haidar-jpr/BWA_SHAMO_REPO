@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../models/products_model.dart';
 import '../../../theme.dart';
-import '../../products_page.dart';
+import '../main/products_page.dart';
 
 class NewArrivalItems extends StatelessWidget {
   const NewArrivalItems({

@@ -33,7 +33,7 @@ class Content extends StatelessWidget {
                 .toList(),
           );
         } else {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         }

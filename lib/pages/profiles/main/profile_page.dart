@@ -12,7 +12,7 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgColor3,
       body: Column(
-        children: [
+        children: const [
           HeaderProfile(),
           ContentProfile(),
         ],

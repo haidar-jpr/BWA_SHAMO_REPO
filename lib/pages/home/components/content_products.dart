@@ -6,7 +6,6 @@ import '../../../providers/cart_provider.dart';
 import '../../../providers/wishlist_provider.dart';
 import '../../../theme.dart';
 import '../../chats/main/detail_chat.dart';
-import '../main/products_page.dart';
 import 'familiar_card_products.dart';
 
 class ContentProduct extends StatefulWidget {
@@ -32,7 +31,7 @@ class _ContentProductState extends State<ContentProduct> {
     Future<void> showSuccessDialog() async {
       return showDialog(
         context: context,
-        builder: (BuildContext context) => Container(
+        builder: (BuildContext context) => SizedBox(
           width: MediaQuery.of(context).size.width - (2 * defaultMargin),
           child: AlertDialog(
             backgroundColor: bgColor1,
@@ -58,7 +57,7 @@ class _ContentProductState extends State<ContentProduct> {
                     'assets/icon_sucesss.png',
                     width: 100,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   Text(
@@ -68,17 +67,17 @@ class _ContentProductState extends State<ContentProduct> {
                       fontWeight: semiBold,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   Text(
                     'Item added successfully',
                     style: secondaryTextStyle,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
-                  Container(
+                  SizedBox(
                     width: 154,
                     height: 44,
                     child: TextButton(
@@ -110,7 +109,7 @@ class _ContentProductState extends State<ContentProduct> {
 
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.only(
+      margin: const EdgeInsets.only(
         top: 17,
       ),
       padding: EdgeInsets.all(
@@ -118,7 +117,7 @@ class _ContentProductState extends State<ContentProduct> {
       ),
       decoration: BoxDecoration(
         color: bgColor1,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(24),
           topRight: Radius.circular(24),
         ),
@@ -154,7 +153,7 @@ class _ContentProductState extends State<ContentProduct> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: secondaryColor,
-                        content: Text(
+                        content: const Text(
                           'Has been added to the Wishlist',
                           textAlign: TextAlign.center,
                         ),
@@ -164,7 +163,7 @@ class _ContentProductState extends State<ContentProduct> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: alertColor,
-                        content: Text(
+                        content: const Text(
                           'Has been removed from the Wishlist',
                           textAlign: TextAlign.center,
                         ),
@@ -185,7 +184,7 @@ class _ContentProductState extends State<ContentProduct> {
             margin: EdgeInsets.only(
               top: defaultMargin - 10,
             ),
-            padding: EdgeInsets.all(
+            padding: const EdgeInsets.all(
               16,
             ),
             width: double.infinity,
@@ -217,7 +216,7 @@ class _ContentProductState extends State<ContentProduct> {
             'Description',
             style: primaryTextStyle.copyWith(fontWeight: medium),
           ),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           Container(
@@ -275,7 +274,7 @@ class _ContentProductState extends State<ContentProduct> {
                     );
                   },
                   style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     side: BorderSide(
                       width: 1,
                       color: primaryColor,
@@ -289,7 +288,7 @@ class _ContentProductState extends State<ContentProduct> {
                     width: 23,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
                 Expanded(
@@ -299,7 +298,7 @@ class _ContentProductState extends State<ContentProduct> {
                       showSuccessDialog();
                     },
                     style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         vertical: 12,
                       ),
                       shape: RoundedRectangleBorder(

@@ -17,7 +17,7 @@ class ContentCheckoutPage extends StatelessWidget {
       margin: EdgeInsets.only(
         top: defaultMargin - 20,
       ),
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 12,
         vertical: 20,
       ),
@@ -35,7 +35,7 @@ class ContentCheckoutPage extends StatelessWidget {
               width: 60,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 12,
           ),
           Expanded(

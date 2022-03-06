@@ -19,9 +19,9 @@ class WishlistPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          wishlistProvider.wishlist.length == 0
-              ? EmptyWishlist()
-              : FavoriteWistlist()
+          wishlistProvider.wishlist.isEmpty
+              ? const EmptyWishlist()
+              : const FavoriteWistlist()
         ],
       ),
     );

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../../providers/page_provider.dart';
 import '../../../theme.dart';
 
 class EmtyCartPage extends StatelessWidget {
@@ -11,9 +9,6 @@ class EmtyCartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    PageProvider provider = Provider.of<PageProvider>(context);
-
     return SizedBox(
       width: double.infinity,
       child: Column(
@@ -24,7 +19,7 @@ class EmtyCartPage extends StatelessWidget {
             'assets/icon_emty_cart.png',
             width: 80,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text(
             'Opss! Your Cart is Empty',
             style: primaryTextStyle.copyWith(
@@ -32,12 +27,12 @@ class EmtyCartPage extends StatelessWidget {
               fontWeight: medium,
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Text(
             'Let\'s find your favorite shoes',
             style: secondaryTextStyle,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               Navigator.pushNamedAndRemoveUntil(
@@ -45,7 +40,7 @@ class EmtyCartPage extends StatelessWidget {
             },
             style: ElevatedButton.styleFrom(
               primary: primaryColor,
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 24,
                 vertical: 10,
               ),

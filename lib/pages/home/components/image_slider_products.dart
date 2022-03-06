@@ -38,13 +38,13 @@ class _ImageSliderProductsState extends State<ImageSliderProducts> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_ios,
                 ),
               ),
               IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.shopping_bag,
                 ),
               ),

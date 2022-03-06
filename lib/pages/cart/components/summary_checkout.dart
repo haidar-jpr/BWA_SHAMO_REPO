@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../providers/cart_provider.dart';
 import '../../../theme.dart';
-import '../main/checkout_page.dart';
+import 'detail_payment_checkout.dart';
 import 'title_chekout.dart';
 
 class SummaryCheckoutPage extends StatelessWidget {
@@ -26,30 +26,30 @@ class SummaryCheckoutPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TittleCheckoutPage(
+          const TittleCheckoutPage(
             name: 'Payment Summary',
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           DetailPaymentCheckout(
             name: 'Product Quantity',
             details: '${cartProvider.totalItem()} Items',
           ),
-          SizedBox(height: 13),
+          const SizedBox(height: 13),
           DetailPaymentCheckout(
             name: 'Product Price',
             details: '\$${cartProvider.totalPrice()}',
           ),
-          SizedBox(height: 13),
-          DetailPaymentCheckout(
+          const SizedBox(height: 13),
+          const DetailPaymentCheckout(
             name: 'Shipping',
             details: 'Free',
           ),
-          SizedBox(height: 11),
-          Divider(
+          const SizedBox(height: 11),
+          const Divider(
             thickness: 1,
             color: Color(0XFF2E3141),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

@@ -23,7 +23,7 @@ class InputEditProfile extends StatelessWidget {
             fontSize: 13,
           ),
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         TextFormField(
           style: primaryTextStyle,
           decoration: InputDecoration(
@@ -38,7 +38,7 @@ class InputEditProfile extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
       ],
     );
   }

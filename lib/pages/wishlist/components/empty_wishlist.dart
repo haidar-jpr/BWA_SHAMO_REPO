@@ -14,7 +14,7 @@ class EmptyWishlist extends StatelessWidget {
 
     PageProvider pageProvider = Provider.of<PageProvider>(context);
 
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -24,7 +24,7 @@ class EmptyWishlist extends StatelessWidget {
             'assets/icon_love.png',
             width: 80,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text(
             ' You don\'t have dream shoes?',
             style: primaryTextStyle.copyWith(
@@ -32,18 +32,18 @@ class EmptyWishlist extends StatelessWidget {
               fontSize: 16,
             ),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Text(
             'Let\'s find your favorite shoes',
             style: secondaryTextStyle,
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           TextButton(
             onPressed: () {
               pageProvider.currentIndex = 0;
             },
             style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 24,
                   vertical: 10,
                 ),

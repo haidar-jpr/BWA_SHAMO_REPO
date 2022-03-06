@@ -1,7 +1,5 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shamo/models/products_model.dart';
 import 'package:shamo/theme.dart';
 
@@ -33,7 +31,7 @@ class ChatBubble extends StatelessWidget {
         crossAxisAlignment:
             isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
-          products is UninitializedProductModel ? SizedBox() : ProductPreview(isSender: isSender, products: products,),
+          products is UninitializedProductModel ? const SizedBox() : ProductPreview(isSender: isSender, products: products,),
           Row(
             mainAxisAlignment:
                 isSender ? MainAxisAlignment.end : MainAxisAlignment.start,
@@ -43,7 +41,7 @@ class ChatBubble extends StatelessWidget {
                   constraints: BoxConstraints(
                     maxWidth: MediaQuery.of(context).size.width * 0.7,
                   ),
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     vertical: 12,
                     horizontal: 16,
                   ),
@@ -52,8 +50,8 @@ class ChatBubble extends StatelessWidget {
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(isSender ? 12 : 0),
                       topRight: Radius.circular(isSender ? 0 : 12),
-                      bottomLeft: Radius.circular(12),
-                      bottomRight: Radius.circular(12),
+                      bottomLeft: const Radius.circular(12),
+                      bottomRight: const Radius.circular(12),
                     ),
                   ),
                   child: Text(

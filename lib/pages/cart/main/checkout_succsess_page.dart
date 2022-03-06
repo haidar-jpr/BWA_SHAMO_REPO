@@ -10,7 +10,7 @@ class CheckoutSuccesss extends StatelessWidget {
       backgroundColor: bgColor3,
       appBar: _header(),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 40),
+        padding: const EdgeInsets.symmetric(horizontal: 40),
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -20,7 +20,7 @@ class CheckoutSuccesss extends StatelessWidget {
               'assets/icon_emty_cart.png',
               width: 80,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               'You made a transaction',
               style: primaryTextStyle.copyWith(
@@ -28,7 +28,7 @@ class CheckoutSuccesss extends StatelessWidget {
                 fontWeight: medium,
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Text(
               'Stay at home while we \nprepare your dream shoes',
               style: secondaryTextStyle,
@@ -42,14 +42,14 @@ class CheckoutSuccesss extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 primary: primaryColor,
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 24,
                   vertical: 10,
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                minimumSize: Size(
+                minimumSize: const Size(
                   double.infinity,
                   44,
                 ),
@@ -62,19 +62,19 @@ class CheckoutSuccesss extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             ElevatedButton(
               onPressed: () {},
               style: ElevatedButton.styleFrom(
-                primary: Color(0XFF39374B),
-                padding: EdgeInsets.symmetric(
+                primary: const Color(0XFF39374B),
+                padding: const EdgeInsets.symmetric(
                   horizontal: 24,
                   vertical: 10,
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                minimumSize: Size(
+                minimumSize: const Size(
                   double.infinity,
                   44,
                 ),

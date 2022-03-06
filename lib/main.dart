@@ -2,9 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shamo/pages/cart/main/cart_page.dart';
-import 'package:shamo/pages/checkout_page.dart';
-import 'package:shamo/pages/checkout_succsess_page.dart';
-import 'package:shamo/pages/edit_profile_page.dart';
+import 'package:shamo/pages/cart/main/checkout_page.dart';
+import 'package:shamo/pages/cart/main/checkout_succsess_page.dart';
+import 'package:shamo/pages/profiles/main/edit_profile_page.dart';
 import 'package:shamo/pages/main_page.dart';
 import 'package:shamo/pages/sign_in_pages.dart';
 import 'package:shamo/pages/sign_up_page.dart';
@@ -19,7 +19,7 @@ import 'package:shamo/providers/wishlist_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -51,14 +51,14 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => SplashPage(),
-          '/sign-in': (context) => SignInPage(),
+          '/': (context) => const SplashPage(),
+          '/sign-in': (context) => const SignInPage(),
           '/sign-up': (context) => SignUpPage(),
-          '/home': (context) => MainPage(),
-          '/edit-profile': (context) => EditProfilePage(),
-          '/cart-page': (context) => CartPage(),
-          '/checkout': (context) => CheckoutPage(),
-          '/checkout-success': (context) => CheckoutSuccesss(),
+          '/home': (context) => const MainPage(),
+          '/edit-profile': (context) => const EditProfilePage(),
+          '/cart-page': (context) => const CartPage(),
+          '/checkout': (context) => const CheckoutPage(),
+          '/checkout-success': (context) => const CheckoutSuccesss(),
         },
       ),
     );

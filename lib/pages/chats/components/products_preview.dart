@@ -22,14 +22,14 @@ class ProductPreview extends StatelessWidget {
         top: defaultMargin,
         bottom: 12,
       ),
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: bgColor5,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(isSender ? 12 : 0),
           topRight: Radius.circular(isSender ? 0 : 12),
-          bottomLeft: Radius.circular(12),
-          bottomRight: Radius.circular(12),
+          bottomLeft: const Radius.circular(12),
+          bottomRight: const Radius.circular(12),
         ),
       ),
       child: Column(
@@ -44,7 +44,7 @@ class ProductPreview extends StatelessWidget {
                   width: 70,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               Expanded(
@@ -64,7 +64,7 @@ class ProductPreview extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Row(
@@ -82,7 +82,7 @@ class ProductPreview extends StatelessWidget {
                   style: primaryTextStyle,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               TextButton(

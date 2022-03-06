@@ -12,9 +12,6 @@ class ProductsServices {
 
     var response = await http.get(url, headers: headers);
 
-    print(response.body);
-    print(response.statusCode);
-
     if (response.statusCode == 200) {
       List data = jsonDecode(response.body)['data']['data'];
       

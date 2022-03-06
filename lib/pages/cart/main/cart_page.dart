@@ -18,8 +18,8 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgColor3,
       appBar: _header(context),
-      body: cartProvider.carts.length == 0 ? EmtyCartPage() : HasCartProducts(),
-      bottomNavigationBar: cartProvider.carts.length == 0 ? SizedBox() : BottomCheckoutCartPage(),
+      body: cartProvider.carts.isEmpty ? const EmtyCartPage() : const HasCartProducts(),
+      bottomNavigationBar: cartProvider.carts.isEmpty ? const SizedBox() : const BottomCheckoutCartPage(),
     );
   }
 
@@ -31,7 +31,7 @@ class CartPage extends StatelessWidget {
         onPressed: () {
           Navigator.pop(context);
         },
-        icon: Icon(
+        icon: const Icon(
           Icons.arrow_back_ios,
           size: 20,
         ),

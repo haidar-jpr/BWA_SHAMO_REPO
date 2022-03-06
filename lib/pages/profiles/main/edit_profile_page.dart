@@ -21,7 +21,7 @@ class EditProfilePage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: Column(
         children: [
-          HeaderEditProfile(),
+          const HeaderEditProfile(),
           Container(
             width: double.infinity,
             margin: EdgeInsets.all(

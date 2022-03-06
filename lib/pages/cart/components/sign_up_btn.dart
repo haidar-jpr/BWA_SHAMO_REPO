@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../theme.dart';
+import '../../../theme.dart';
 
 class SignUpButton extends StatelessWidget {
   final String txt;

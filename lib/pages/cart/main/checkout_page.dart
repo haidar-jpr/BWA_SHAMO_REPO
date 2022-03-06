@@ -28,7 +28,7 @@ class CheckoutPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TittleCheckoutPage(
+                const TittleCheckoutPage(
                   name: 'List Items',
                 ),
                 Column(
@@ -44,16 +44,16 @@ class CheckoutPage extends StatelessWidget {
             ),
           ),
           SizedBox(height: defaultMargin),
-          AddressCheckoutPage(),
+          const AddressCheckoutPage(),
           SizedBox(height: defaultMargin),
-          SummaryCheckoutPage(),
+          const SummaryCheckoutPage(),
           SizedBox(height: defaultMargin),
           Divider(
             thickness: 1,
             color: bgColor2,
           ),
           SizedBox(height: defaultMargin),
-          ButtonCheckoutPage(),
+          const ButtonCheckoutPage(),
         ],
       ),
     );
@@ -65,7 +65,7 @@ class CheckoutPage extends StatelessWidget {
         onPressed: () {
           Navigator.pop(ctx);
         },
-        icon: Icon(
+        icon: const Icon(
           Icons.arrow_back_ios,
           size: 20,
         ),

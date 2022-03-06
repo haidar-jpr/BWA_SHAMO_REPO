@@ -46,7 +46,7 @@ class BottomCheckoutCartPage extends StatelessWidget {
             },
             style: ElevatedButton.styleFrom(
                 primary: primaryColor,
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 20,
                   vertical: 13,
                 ),
@@ -63,7 +63,7 @@ class BottomCheckoutCartPage extends StatelessWidget {
                     fontWeight: semiBold,
                   ),
                 ),
-                Icon(
+                const Icon(
                   Icons.arrow_forward_ios,
                   size: 20,
                 ),

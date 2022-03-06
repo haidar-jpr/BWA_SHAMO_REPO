@@ -6,7 +6,7 @@ import '../../../providers/wishlist_provider.dart';
 import '../../../theme.dart';
 
 class CardProductWistlist extends StatelessWidget {
-  CardProductWistlist({
+  const CardProductWistlist({
     this.products,
     Key? key,
   }) : super(key: key);
@@ -19,7 +19,7 @@ class CardProductWistlist extends StatelessWidget {
     WishlistProvider wishlistProvider = Provider.of<WishlistProvider>(context);
 
     return Container(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         vertical: 10,
         horizontal: 12,
       ),
@@ -39,7 +39,7 @@ class CardProductWistlist extends StatelessWidget {
               width: 60,
             ),
           ),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

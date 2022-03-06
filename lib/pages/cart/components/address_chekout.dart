@@ -12,7 +12,7 @@ class AddressCheckoutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: bgColor4,
         borderRadius: BorderRadius.circular(12),
@@ -20,10 +20,10 @@ class AddressCheckoutPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TittleCheckoutPage(
+          const TittleCheckoutPage(
             name: 'Address Details',
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -44,16 +44,16 @@ class AddressCheckoutPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  LocationCheckoutPage(
+                  const LocationCheckoutPage(
                     storeLocation: 'Store Location',
                     homeLocation: 'Adidas Core',
                   ),
                   SizedBox(height: defaultMargin),
-                  LocationCheckoutPage(
+                  const LocationCheckoutPage(
                     storeLocation: 'Your Address',
                     homeLocation: 'Marsemoon',
                   ),

@@ -20,8 +20,8 @@ class CardCart extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.only(bottom: 20),
-      padding: EdgeInsets.symmetric(
+      margin: const EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.symmetric(
         horizontal: 16,
         vertical: 10,
       ),
@@ -40,7 +40,7 @@ class CardCart extends StatelessWidget {
                   width: 60,
                 ),
               ),
-              SizedBox(width: 12),
+              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,14 +72,14 @@ class CardCart extends StatelessWidget {
                       width: 16,
                     ),
                   ),
-                  SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   Text(
                     '${cart!.quantity}',
                     style: primaryTextStyle.copyWith(
                       fontWeight: medium,
                     ),
                   ),
-                  SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   GestureDetector(
                     onTap: () {
                       cartProvider.reduceQuantity(cart!.id!);
@@ -93,7 +93,7 @@ class CardCart extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           GestureDetector(
             onTap: () {
               cartProvider.removeCart(cart!.id!);

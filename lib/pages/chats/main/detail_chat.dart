@@ -18,7 +18,7 @@ class DetailChatPage extends StatelessWidget {
       bottomNavigationBar: InputChat(
         products: products,
       ),
-      body: Content(),
+      body: const Content(),
     );
   }
 
@@ -95,14 +95,14 @@ class _ProductPreviewState extends State<ProductPreview> {
   @override
   Widget build(BuildContext context) {
     return widget.products?.id == null
-        ? SizedBox()
+        ? const SizedBox()
         : Container(
             width: 225,
             height: 74,
-            margin: EdgeInsets.only(
+            margin: const EdgeInsets.only(
               bottom: 20,
             ),
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: bgColor5,
               borderRadius: BorderRadius.circular(12),
@@ -117,7 +117,7 @@ class _ProductPreviewState extends State<ProductPreview> {
                     width: 54,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
