@@ -1,19 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shamo/pages/cart_page.dart';
+import 'package:shamo/pages/cart/main/cart_page.dart';
 import 'package:shamo/pages/checkout_page.dart';
 import 'package:shamo/pages/checkout_succsess_page.dart';
-import 'package:shamo/pages/components/detail_chat.dart';
 import 'package:shamo/pages/edit_profile_page.dart';
-import 'package:shamo/pages/home/main_page.dart';
-import 'package:shamo/pages/products_page.dart';
+import 'package:shamo/pages/main_page.dart';
 import 'package:shamo/pages/sign_in_pages.dart';
 import 'package:shamo/pages/sign_up_page.dart';
 import 'package:shamo/pages/splash_page.dart';
 import 'package:shamo/providers/auth_provider.dart';
 import 'package:shamo/providers/cart_provider.dart';
+import 'package:shamo/providers/page_provider.dart';
 import 'package:shamo/providers/products_provider.dart';
 import 'package:shamo/providers/transaction_provider.dart';
 import 'package:shamo/providers/wishlist_provider.dart';
@@ -46,6 +44,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => TransactionProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (ctx) => PageProvider(),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
